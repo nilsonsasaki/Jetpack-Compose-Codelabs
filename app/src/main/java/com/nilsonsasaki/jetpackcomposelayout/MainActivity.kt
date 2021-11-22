@@ -9,8 +9,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListItemInfo
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
@@ -31,7 +36,7 @@ class MainActivity : ComponentActivity() {
             JetpackComposeLayoutTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    LayoutsCodelab()
+                    LazyList()
                 }
             }
         }
@@ -77,6 +82,8 @@ fun PhotographerCardPreview() {
     }
 }*/
 
+/* Second part of Codelab
+
 @Preview
 @Composable
 fun LayoutCodelabPreview() {
@@ -94,7 +101,9 @@ fun LayoutsCodelab() {
                     Text(text = "LayoutsCodelab")
                 },
                 actions = {
-                    IconButton(onClick = { /*TODO*/ }) {
+                    IconButton(onClick = { */
+/*TODO*//*
+ }) {
                         Icon(
                             imageVector = Icons.Filled.Favorite,
                             contentDescription = null
@@ -115,5 +124,46 @@ fun BodyContent(modifier: Modifier = Modifier) {
         Text(text = "Thanks for going through the Layouts codelab")
     }
 }
+*/
 
+@Composable
+fun SimpleList() {
+    // We save the scrolling position with this state that can also
+    // be used to programmatically scroll the list
+    val scrollState = rememberScrollState()
 
+    Column(Modifier.verticalScroll(scrollState)) {
+        repeat(100) {
+            Text("Item #$it")
+        }
+    }
+}
+
+@Preview
+@Composable
+fun SimpleListPreview() {
+    JetpackComposeLayoutTheme {
+        SimpleList()
+    }
+}
+
+@Composable
+fun LazyList(){
+    // We save the scrolling position with this state that can also
+    // be used to programmatically scroll the list
+    val scrollState = rememberLazyListState()
+
+    LazyColumn(state = scrollState) {
+        items(100) {
+            Text("Item #$it")
+        }
+    }
+}
+
+@Preview
+@Composable
+fun LazyListPreview(){
+    JetpackComposeLayoutTheme {
+        LazyList()
+    }
+}
